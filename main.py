@@ -9,7 +9,7 @@ if not sys.argv:
     sys.argv = [""]
 
 def start_vue_frontend():
-    command1 = subprocess.Popen(['npm', 'install', 'axios'], cwd='./frontend')
+    command1 = subprocess.Popen(['npm', 'install', 'axios'], cwd='./frontend') # axios needed to send http requests to backend
     command1#.wait()
     command2 = subprocess.Popen(['npm', 'install'], cwd='./frontend')
     command2#.wait()
