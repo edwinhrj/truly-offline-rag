@@ -1,4 +1,5 @@
 __pycache__/
 *.db
-backend/src/pdf/model/
+backend/src/pdf/embed_model/
 test.ipynb
+backend/src/query/llm_model/
