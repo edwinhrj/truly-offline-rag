@@ -10,7 +10,7 @@ def add_to_sqlite(chunks: list[Document]):
     db.enable_load_extension(True) 
     sqlite_vec.load(db)
     db.enable_load_extension(False)
-    model = SentenceTransformer('jinaai/jina-embeddings-v2-base-en')
+    model = SentenceTransformer('src/pdf/model')
     # create a vector table to store vectors, together with non-vector metadata
     db.execute("""
         CREATE VIRTUAL TABLE IF NOT EXISTS vec_items 

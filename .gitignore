@@ -1,3 +1,4 @@
 __pycache__/
 *.db
 backend/src/pdf/model/
+test.ipynb

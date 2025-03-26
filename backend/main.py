@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from src.routes.demo import router as demo_router
-from src.routes.sqlite import router as sqlite_router
+from backend.src.routes.demo_routes import router as demo_router
+from backend.src.routes.sqlite_routes import router as sqlite_router
+from backend.src.routes.query_routes import router as query_router
 
 app = FastAPI()
 
@@ -15,6 +16,7 @@ app.add_middleware(
 
 app.include_router(demo_router, prefix="/demo")
 app.include_router(sqlite_router, prefix="/sqlite")
+app.include_router(query_router, prefix="/query")
 
 if __name__ == "__main__":
     import uvicorn
