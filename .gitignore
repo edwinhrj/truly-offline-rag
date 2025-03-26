@@ -3,3 +3,4 @@ __pycache__/
 backend/src/pdf/embed_model/
 test.ipynb
 backend/src/query/llm_model/
+.DS_Store
