@@ -7,7 +7,7 @@
       style="display: none"
       @change="handleFileUpload"
     />
-    <button @click="triggerFileInput">在此处上传PDF文件</button>
+    <button @click="triggerFileInput">传PDF文件</button>
   </div>
 </template>
 

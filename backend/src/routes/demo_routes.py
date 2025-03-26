@@ -3,8 +3,11 @@ import sqlite_vec
 from sentence_transformers import SentenceTransformer
 from fastapi import APIRouter
 import numpy as np
+from src.pdf.embed_model import embed_model
 
 router = APIRouter()
+
+model = SentenceTransformer('src/pdf/embed_model') # load pre installed membed model
 
 @router.post("/sqlite")
 def read_data():
@@ -15,10 +18,9 @@ def read_data():
     sqlite_vec.load(db)
     db.enable_load_extension(False) 
 
-    model = SentenceTransformer('src/pdf/embed_model') # load pre installed membed model
 
     query = "mongodb and redis"
-    embedding = model.encode(query)
+    embedding = embed_model.encode(query)
     embedding = embedding.astype(np.float32)
 
     rows = db.execute( # k nearest neighbour search

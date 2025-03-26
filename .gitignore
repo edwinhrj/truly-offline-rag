@@ -2,5 +2,5 @@ __pycache__/
 *.db
 backend/src/pdf/embed_model/
 test.ipynb
-backend/src/query/llm_model/
+backend/src/query/llm/
 .DS_Store
