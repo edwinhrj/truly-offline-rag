@@ -5,4 +5,4 @@ router = APIRouter()
 
 @router.post("/ask")    
 async def ask(question: str = Body(..., embed=True)):
-    return str(llm(question))
+    return str(llm(question, max_tokens=32768))
