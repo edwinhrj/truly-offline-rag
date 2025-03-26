@@ -1,6 +1,5 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from src.routes.demo_routes import router as demo_router
 from src.routes.sqlite_routes import router as sqlite_router
 from src.routes.query_routes import router as query_router
 
@@ -14,7 +13,6 @@ app.add_middleware(
     allow_headers=["*"],  
 )
 
-app.include_router(demo_router, prefix="/demo")
 app.include_router(sqlite_router, prefix="/sqlite")
 app.include_router(query_router, prefix="/query")
 

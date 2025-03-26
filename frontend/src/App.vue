@@ -1,6 +1,6 @@
 <template>
   <div class="upload">
-    <h3>漫调AI</h3>
+    <h3>漫调AI(使用QWEN2.5 1B)</h3>
     <Upload />
   </div>
 

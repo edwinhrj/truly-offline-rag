@@ -2,7 +2,7 @@
   <div class="qa-container">
     <div class="qa-input">
       <input
-        v-model="question"
+        v-model="query"
         placeholder="请询问与贵公司相关的任何问题"
         @keydown.enter="handleAsk"
         autocomplete="off"
@@ -25,17 +25,17 @@ import axios from "axios";
 export default {
   data() {
     return {
-      question: "",
+      query: "",
       answer: "",
     };
   },
   methods: {
     async handleAsk() {
-      if (!this.question.trim()) return;
+      if (!this.query.trim()) return;
 
       try {
         const response = await axios.post("http://localhost:8000/query/ask", {
-          question: this.question,
+          query: this.query,
         });
         // Assume the backend returns the answer in response.data.answer
         this.answer = response.data;

@@ -2,7 +2,7 @@ import sqlite3
 import sqlite_vec
 import numpy as np
 from langchain.schema.document import Document
-from sentence_transformers import SentenceTransformer
+from ..pdf.embed_model import embed_model
 from .parse import calculate_chunk_ids
 
 def add_to_sqlite(chunks: list[Document]):
@@ -10,7 +10,7 @@ def add_to_sqlite(chunks: list[Document]):
     db.enable_load_extension(True) 
     sqlite_vec.load(db)
     db.enable_load_extension(False)
-    model = SentenceTransformer('src/pdf/embed_model')
+
     # create a vector table to store vectors, together with non-vector metadata
     db.execute("""
         CREATE VIRTUAL TABLE IF NOT EXISTS vec_items 
@@ -32,7 +32,7 @@ def add_to_sqlite(chunks: list[Document]):
         print(f"adding new documents: {len(new_chunks)}")
         for chunk in new_chunks:
             chunk_text = chunk.page_content # string
-            embedding = model.encode(chunk_text).astype(np.float32)
+            embedding = embed_model.encode(chunk_text).astype(np.float32)
             db.execute(
                 "INSERT INTO vec_items(id, text, source, page, embedding) VALUES (?, ?, ?, ?, ?)",
                 [chunk.metadata["id"], chunk_text, chunk.metadata["source"], chunk.metadata["page"], embedding],
