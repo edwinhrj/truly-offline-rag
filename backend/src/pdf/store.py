@@ -10,15 +10,15 @@ def add_to_sqlite(chunks: list[Document]):
     db.enable_load_extension(True) 
     sqlite_vec.load(db)
     db.enable_load_extension(False)
-    model = SentenceTransformer('src/pdf/model')
+    model = SentenceTransformer('src/pdf/embed_model')
     # create a vector table to store vectors, together with non-vector metadata
     db.execute("""
         CREATE VIRTUAL TABLE IF NOT EXISTS vec_items 
-        USING vec0(chunk_id TEXT, chunk_text TEXT, source TEXT, page INTEGER, embedding float[768] distance_metric=cosine)
+        USING vec0(id TEXT, text TEXT, source TEXT, page INTEGER, embedding float[768] distance_metric=cosine)
         """)
 
     # retreive current chunk ids in sqlite db
-    existing_items = db.execute("SELECT chunk_id FROM vec_items").fetchall()
+    existing_items = db.execute("SELECT id FROM vec_items").fetchall()
     existing_ids = set([item[0] for item in existing_items])
     print(f"Number of existing documents in DB: {len(existing_ids)}")
 
@@ -34,7 +34,7 @@ def add_to_sqlite(chunks: list[Document]):
             chunk_text = chunk.page_content # string
             embedding = model.encode(chunk_text).astype(np.float32)
             db.execute(
-                "INSERT INTO vec_items(chunk_id, chunk_text, source, page, embedding) VALUES (?, ?, ?, ?, ?)",
+                "INSERT INTO vec_items(id, text, source, page, embedding) VALUES (?, ?, ?, ?, ?)",
                 [chunk.metadata["id"], chunk_text, chunk.metadata["source"], chunk.metadata["page"], embedding],
             )
         print("new documents added to sqlite db")

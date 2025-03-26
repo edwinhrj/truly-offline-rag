@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from backend.src.routes.demo_routes import router as demo_router
-from backend.src.routes.sqlite_routes import router as sqlite_router
-from backend.src.routes.query_routes import router as query_router
+from src.routes.demo_routes import router as demo_router
+from src.routes.sqlite_routes import router as sqlite_router
+from src.routes.query_routes import router as query_router
 
 app = FastAPI()
 

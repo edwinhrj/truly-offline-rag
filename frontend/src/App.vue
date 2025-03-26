@@ -1,35 +1,31 @@
 <template>
-  <div class="demo">
-    <h1>DEMO: {{ message }}</h1>
-    <button @click="create">DEMO: populate sqlite-vec</button>
-    <button @click="fetchsqlite">DEMO: fetch most similar vector</button>
+  <div class="upload">
+    <h3>{{ message }}</h3>
+    <button @click="fetchsqlite">fetch most similar sentence</button>
+    <Upload />
   </div>
 
-  <div class="upload"><Upload /></div>
+  <div class="query">
+    <Query />
+  </div>
 </template>
 
 <script>
 import axios from "axios";
 import Upload from "./components/Upload.vue";
+import Query from "./components/Query.vue";
 
 export default {
   data() {
     return {
-      message: "loading...",
+      message: "(most similar sentence)",
     };
   },
   components: {
     Upload,
+    Query,
   },
   methods: {
-    async create() {
-      try {
-        await axios.post("http://localhost:8000/demo/create");
-      } catch (error) {
-        console.log("error:", error);
-        this.message = "failed to populate sqlite";
-      }
-    },
     async fetchsqlite() {
       try {
         const response = await axios.post("http://localhost:8000/demo/sqlite");
@@ -42,8 +38,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.upload {
-  margin-top: 200px;
-}
-</style>
+<style scoped></style>

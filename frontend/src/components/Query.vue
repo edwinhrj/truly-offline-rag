@@ -19,33 +19,33 @@
   </div>
 </template>
 
-<script setup>
-import { ref } from "vue";
+<script>
 import axios from "axios";
 
-const question = ref("");
-const answer = ref("");
+export default {
+  data() {
+    return {
+      question: "",
+      answer: "",
+    };
+  },
+  methods: {
+    async handleAsk() {
+      if (!this.question.trim()) return;
 
-// When the user clicks "Ask" or presses Enter, send the question to the backend.
-async function handleAsk() {
-  if (!question.value.trim()) return;
-
-  try {
-    const response = await axios.post(
-      "http://localhost:8000/query/ask",
-      {
-        question: question.value,
-      },
-      // send company name to backend to know which milvus collection to retrieve from
-      { headers: { company } }
-    );
-    // Assume the backend returns the answer in response.data.answer
-    answer.value = response.data;
-  } catch (error) {
-    console.error("Error during request:", error);
-    answer.value = "获取答案时出错。请再试一次。";
-  }
-}
+      try {
+        const response = await axios.post("http://localhost:8000/query/ask", {
+          question: this.question,
+        });
+        // Assume the backend returns the answer in response.data.answer
+        this.answer = response.data;
+      } catch (error) {
+        console.error("Error during request:", error);
+        this.answer = "获取答案时出错。请再试一次。";
+      }
+    },
+  },
+};
 </script>
 
 <style scoped></style>
