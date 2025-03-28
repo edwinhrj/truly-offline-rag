@@ -1,22 +1,22 @@
 <template>
   <div class="upload">
     <h3>漫调AI(使用QWEN2.5 1B)</h3>
-    <Upload />
+    <FileUpload></FileUpload>
   </div>
 
   <div class="query">
-    <Query />
+    <UserQuery></UserQuery>
   </div>
 </template>
 
 <script>
-import Upload from "./components/Upload.vue";
-import Query from "./components/Query.vue";
+import FileUpload from "./components/FileUpload.vue";
+import UserQuery from "./components/UserQuery.vue";
 
 export default {
   components: {
-    Upload,
-    Query,
+    FileUpload,
+    UserQuery,
   },
 };
 </script>

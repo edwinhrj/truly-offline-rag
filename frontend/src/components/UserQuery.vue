@@ -23,6 +23,7 @@
 import axios from "axios";
 
 export default {
+  name: "UserQuery",
   data() {
     return {
       query: "",

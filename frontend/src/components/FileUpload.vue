@@ -15,7 +15,7 @@
 import axios from "axios";
 
 export default {
-  name: "Upload",
+  name: "FileUpload",
   methods: {
     triggerFileInput() {
       this.$refs.fileInput.click();
